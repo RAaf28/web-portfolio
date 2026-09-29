@@ -21,15 +21,24 @@ function frameToAscii(context: CanvasRenderingContext2D, width: number, height: 
 }
 
 export default function AsciiCamera() {
+  const cameraRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const animationRef = useRef<number | null>(null);
   const [ascii, setAscii] = useState("Camera feed offline\nPress START CAMERA to begin");
   const [status, setStatus] = useState("Ready");
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(document.fullscreenElement === cameraRef.current);
+    };
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+
     return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
@@ -104,8 +113,26 @@ export default function AsciiCamera() {
     }
   };
 
+  const toggleFullscreen = async () => {
+    if (!cameraRef.current) {
+      return;
+    }
+
+    try {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+      } else if (cameraRef.current.requestFullscreen) {
+        await cameraRef.current.requestFullscreen();
+      } else {
+        setStatus("Fullscreen unavailable");
+      }
+    } catch {
+      setStatus("Fullscreen unavailable");
+    }
+  };
+
   return (
-    <div className="ascii-camera">
+    <div ref={cameraRef} className="ascii-camera">
       <div className="ascii-screen" aria-live="polite">
         <pre className="ascii-output">{ascii}</pre>
       </div>
@@ -119,6 +146,9 @@ export default function AsciiCamera() {
           </button>
           <button type="button" className="camera-button" onClick={stopCamera}>
             Stop
+          </button>
+          <button type="button" className="camera-button" onClick={toggleFullscreen}>
+            {isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
           </button>
         </div>
       </div>

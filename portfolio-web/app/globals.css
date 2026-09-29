@@ -443,6 +443,29 @@ a {
   padding: 1rem;
 }
 
+.ascii-camera:fullscreen {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  background: #000;
+  padding: clamp(1rem, 4vw, 4rem);
+}
+
+.ascii-camera:fullscreen .ascii-screen {
+  flex: 1;
+  min-height: 0;
+  border-color: #fff;
+}
+
+.ascii-camera:fullscreen .ascii-output {
+  font-size: clamp(0.6rem, 1.15vw, 1.25rem) !important;
+}
+
+.ascii-camera:fullscreen .ascii-camera-footer {
+  flex-shrink: 0;
+}
+
 .ascii-screen {
   min-height: 13rem;
   display: grid;
