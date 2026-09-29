@@ -1,0 +1,6 @@
+{
+  "version": 2,
+  "framework": "nextjs",
+  "installCommand": "cd portfolio-web && npm install",
+  "buildCommand": "cd portfolio-web && npm run build"
+}
