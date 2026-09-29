@@ -1,0 +1,577 @@
+@import "tailwindcss";
+@import "98.css/style.css";
+
+:root {
+  --bg-deep: #071d1f;
+  --bg-mid: #103538;
+  --panel: #123a3d;
+  --panel-soft: rgba(18, 58, 61, 0.8);
+  --accent: #7ce0cf;
+  --accent-strong: #b9f7e8;
+  --accent-action: #ffc247;
+  --line: #dff9f2;
+  --text: #edf7f3;
+  --muted: #cdeae3;
+  --shadow: #010d0e;
+  --button: #1a585d;
+}
+
+@theme inline {
+  --color-background: var(--bg-deep);
+  --color-foreground: var(--text);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-terminal);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: var(--font-geist-sans), "Segoe UI", Arial, sans-serif;
+  min-height: 100vh;
+}
+
+.hero-name {
+  font-family: var(--font-pixel), monospace;
+  font-size: clamp(1.1rem, 3vw, 2rem);
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.desktop-shell {
+  min-height: 100vh;
+  background: #008080;
+  padding: 1.25rem 1rem 5rem;
+  position: relative;
+}
+
+.desktop-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.window {
+  background: #123a3d;
+  border: 2px solid #d8f4ef;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: #000080;
+  color: white;
+  padding: 0.2rem 0.3rem;
+}
+
+.window-controls {
+  display: flex;
+  gap: 0.25rem;
+  margin-left: auto;
+}
+
+.window-control {
+  display: grid;
+  width: 1.25rem;
+  height: 1.15rem;
+  place-items: center;
+  border: 2px outset #dfdfdf;
+  background: #c0c0c0;
+  color: #111;
+  cursor: pointer;
+  font-family: var(--font-terminal), monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0;
+}
+
+.window-control:hover,
+.window-control:focus-visible {
+  background: #dfdfdf;
+  color: #111;
+  outline: none;
+}
+
+.window-control-close:hover,
+.window-control-close:focus-visible {
+  background: #dfdfdf;
+  color: #111;
+}
+
+.taskbar {
+  position: fixed;
+  z-index: 20;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 2px solid #d8f4ef;
+  background: #0b3034;
+  box-shadow: none;
+  padding: 0.55rem 0.9rem;
+}
+
+.taskbar-start {
+  border: 2px outset #8fb8b6;
+  background: #123a3d;
+  color: var(--text);
+  font-weight: 700;
+  padding: 0.45rem 0.9rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+
+.taskbar-shortcuts {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex: 1;
+}
+
+.taskbar-pill {
+  border: 1px solid rgba(216, 244, 239, 0.5);
+  background: #123a3d;
+  color: var(--accent-action);
+  padding: 0.42rem 0.7rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: filter 0.15s ease;
+}
+
+.taskbar-clock {
+  border: 1px inset #d8f4ef;
+  background: #123a3d;
+  padding: 0.45rem 0.7rem;
+  color: #111;
+  color: var(--accent-action);
+  font-family: var(--font-terminal), monospace;
+  font-size: 0.7rem;
+}
+
+.toolbar-title {
+  font-family: var(--font-terminal), monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: white;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-terminal), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+  padding: 0.95rem 1rem 0.7rem;
+  border-bottom: 2px groove #808080;
+  margin-bottom: 1rem;
+}
+
+.tabs-strip {
+  display: flex;
+  gap: 0.15rem;
+  padding: 0.55rem 0.75rem 0;
+  background: #0b3034;
+  border-bottom: 1px solid rgba(216, 244, 239, 0.4);
+}
+
+.tab {
+  border: 1px solid rgba(216, 244, 239, 0.45);
+  border-bottom: 0;
+  background: #123a3d;
+  color: var(--muted);
+  padding: 0.35rem 0.7rem;
+  font-family: var(--font-terminal), monospace;
+  font-size: 0.68rem;
+}
+
+.tab.active {
+  position: relative;
+  z-index: 1;
+  background: #123a3d;
+  color: var(--accent-action);
+  padding-bottom: 0.48rem;
+}
+
+.tab:hover,
+.tab:focus-visible {
+  color: var(--accent-action);
+  outline: none;
+}
+
+.eyebrow,
+.mono-label {
+  font-family: var(--font-terminal), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+}
+
+.panel,
+.project-card,
+.experience-item {
+  background: #0a282a;
+  border: 1px solid rgba(216, 244, 239, 0.35);
+  border-radius: 0;
+}
+
+.panel {
+  padding: 1rem;
+}
+
+.check-item {
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.check-item::before {
+  position: absolute;
+  left: 0;
+  color: var(--accent-action);
+  content: "✓";
+  font-family: var(--font-terminal), monospace;
+  font-weight: 700;
+}
+
+.status-bar {
+  display: flex;
+  gap: 0.3rem;
+  padding: 0.25rem;
+  background: #0b3034;
+  border-top: 1px solid rgba(216, 244, 239, 0.4);
+}
+
+.status-bar-field {
+  flex: 1;
+  border: 1px inset #d8f4ef;
+  color: var(--muted);
+  padding: 0.2rem 0.4rem;
+  font-family: var(--font-terminal), monospace;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--accent-action);
+  background: #123a3d;
+  color: var(--accent-action);
+  padding: 0.78rem 1.1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.btn:hover,
+.nav-link:hover,
+.tag:hover {
+  filter: brightness(1.12);
+}
+
+.btn-primary {
+  background: var(--accent-action);
+  border-color: var(--accent-action);
+  color: #102326;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  border: 1px solid rgba(216, 244, 239, 0.4);
+  background: #123a3d;
+  padding: 0.8rem 0.9rem;
+  color: var(--accent-action);
+  font-size: 0.82rem;
+}
+
+.contact-icon {
+  display: inline-grid;
+  min-width: 2.1rem;
+  min-height: 1.7rem;
+  place-items: center;
+  border: 1px solid var(--accent-action);
+  color: var(--accent-action);
+  font-family: var(--font-terminal), monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.project-card {
+  padding: 1rem;
+}
+
+.project-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 10rem;
+  overflow: hidden;
+  border: 2px inset #dfdfdf;
+  background: #000;
+  aspect-ratio: 16 / 9;
+}
+
+.project-image {
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.project-visual:hover .project-image,
+.project-thumbnail:hover .project-image {
+  transform: scale(1.04);
+}
+
+.project-image-label {
+  position: absolute;
+  left: 0.65rem;
+  bottom: 0.6rem;
+  z-index: 1;
+  background: #000080;
+  color: white;
+  padding: 0.3rem 0.45rem;
+  font-family: var(--font-terminal), monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.project-thumbnails {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.project-thumbnail {
+  position: relative;
+  min-height: 4.2rem;
+  overflow: hidden;
+  border: 2px inset #dfdfdf;
+  background: #000;
+  aspect-ratio: 16 / 9;
+}
+
+.project-label {
+  font-family: var(--font-terminal), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--tag-color, #54c7b2);
+  background: rgba(124, 224, 207, 0.08);
+  color: var(--tag-color, #b9f7e8);
+  padding: 0.3rem 0.55rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+}
+
+.tag-soft {
+  --tag-color: #7ab8ff;
+  background: rgba(122, 184, 255, 0.08);
+}
+
+.project-card .tag:nth-child(3n + 1) {
+  --tag-color: #54c7b2;
+}
+
+.project-card .tag:nth-child(3n + 2) {
+  --tag-color: #c59cff;
+}
+
+.project-card .tag:nth-child(3n) {
+  --tag-color: #7ab8ff;
+}
+
+.ascii-panel {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ascii-panel pre {
+  margin: 0;
+  color: #f5f5f5;
+  font-size: 0.55rem;
+  line-height: 1.05;
+  font-family: var(--font-terminal), monospace;
+  text-align: center;
+}
+
+.ascii-camera {
+  padding: 1rem;
+}
+
+.ascii-screen {
+  min-height: 13rem;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 2px inset #dfdfdf;
+  background: #000;
+  color: #fff;
+  padding: 0.75rem;
+}
+
+.ascii-output {
+  margin: 0;
+  display: block;
+  width: 100%;
+  background: #000 !important;
+  color: #fff !important;
+  font-family: var(--font-terminal), monospace !important;
+  font-size: 0.48rem !important;
+  line-height: 1.05;
+  text-align: center;
+  white-space: pre;
+}
+
+.camera-source {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ascii-camera-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.camera-status {
+  color: var(--accent-action);
+  font-family: var(--font-terminal), monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.camera-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.camera-button {
+  border: 2px outset #dfdfdf;
+  background: #c0c0c0;
+  color: #111;
+  cursor: pointer;
+  padding: 0.45rem 0.65rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.camera-button:hover {
+  filter: brightness(1.15);
+}
+
+.experience-item {
+  padding: 1rem 1.1rem;
+}
+
+.experience-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.experience-role {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.experience-period {
+  font-family: var(--font-terminal), monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-action);
+}
+
+.status-indicator {
+  color: var(--accent-action);
+}
+
+.taskbar-pill,
+.project-card a {
+  color: var(--accent-action);
+}
+
+.taskbar-pill:hover,
+.taskbar-pill:focus-visible,
+.project-card a:hover,
+.project-card a:focus-visible {
+  background: var(--accent-action);
+  color: #102326;
+  outline: none;
+}
+
+@media (max-width: 640px) {
+  .toolbar {
+    align-items: center;
+  }
+
+  .toolbar-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .ascii-camera-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
